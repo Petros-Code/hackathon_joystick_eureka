@@ -1,0 +1,26 @@
+{
+  "name": "hackaton_joystick_eureka",
+  "version": "1.0.0",
+  "description": "Sujet 1 par l'équipe numéro 6 : JOYSTICK",
+  "license": "ISC",
+  "author": "Guillaume EVRARD, Fatiha ESSAIDI, Pierre EYSSAUTIER",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "argon2": "^0.43.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "joi": "^18.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mariadb": "^3.4.5",
+    "morgan": "^1.10.1",
+    "mysql2": "^3.14.3"
+  }
+}
