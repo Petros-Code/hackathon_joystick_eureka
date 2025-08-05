@@ -6,7 +6,7 @@ const port = 3000;
 
 //#region CHECK ETAT DU SERVEUR
 app.get("/bienvenue", (req, res) => {
-    res.json({ message: "Bienvenue sur le serveur EUREKA"})
+    res.json({ message: "Bienvenue sur le serveur EUREKA de la ville de Pau"})
 });
 app.get("/etat", async (req, res) => {
     try {
