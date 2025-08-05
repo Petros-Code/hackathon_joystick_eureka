@@ -1,8 +1,13 @@
 import express from "express";
 import pool from "./config/db.js";
-
+import IdeeControlleur from "./module.idees/idee.controlleur.js";
 const app = express();
 const port = 3000;
+
+// const ideeRoutes = require("./module.idees/idee.routes.js");
+
+app.use(express.json());
+app.use(IdeeControlleur);
 
 //#region CHECK ETAT DU SERVEUR
 app.get("/bienvenue", (req, res) => {
