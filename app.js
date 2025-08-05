@@ -1,3 +1,5 @@
+import cors from "cors";
+import morgan from "morgan";
 import express from "express";
 import pool from "./config/db.js";
 
@@ -18,7 +20,11 @@ app.get("/etat", async (req, res) => {
     }
 });
 //#endregion
-
+//#region MIDDLEWARES
+app.use(cors());
+app.use(express.json());
+app.use(morgan("dev"));
+//#endregion
 
 
 
