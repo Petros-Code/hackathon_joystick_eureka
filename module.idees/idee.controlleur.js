@@ -10,6 +10,7 @@ class IdeeControlleur {
             const newIdee = await this.ideeRepository.createIdee({titre, corps_de_texte, categorie});
             res.status(201).json(newIdee);
         } catch (error) {
+            console.error(error);
             next(error);
         }
     }

@@ -4,9 +4,9 @@ class IdeeRepository{
     }
 
     async createIdee(idee) {
-        const { titre, corps_de_texte, categorie, dateCreation } = idee;
-        const query = 'INSERT INTO idees (titre, corps_de_texte, categorie) VALUES (?, ?, ?) RETURNING *';
-        const values = [titre, corps_de_texte, categorie, dateCreation];
+        const { titre, corps_de_texte, categorie} = idee;
+        const query = 'INSERT INTO idees (titre, corps_de_texte, categorie) VALUES (?, ?, ?)';
+        const values = [titre, corps_de_texte, categorie];
         
         try {
             const result = await this.pool.query(query, values);

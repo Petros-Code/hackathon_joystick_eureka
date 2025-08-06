@@ -1,6 +1,5 @@
 import express from "express";
 import pool from "./config/db.js";
-import IdeeControlleur from "./module.idees/idee.controlleur.js";
 const app = express();
 const port = 3000;
 
@@ -8,7 +7,6 @@ import ideeRoutes from "./routes/idee.routes.js";
 import errorHandler from "./middlewares/errorHandler.js";
 
 app.use(express.json());
-app.use(IdeeControlleur);
 app.use("/idees",ideeRoutes);
 
 app.use(errorHandler);
@@ -27,10 +25,6 @@ app.get("/etat", async (req, res) => {
     }
 });
 //#endregion
-
-
-
-
 
 
 
