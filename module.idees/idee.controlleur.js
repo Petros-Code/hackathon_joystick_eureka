@@ -5,9 +5,9 @@ class IdeeControlleur {
     }
 
     async createIdee(req,res,next) {
-        const {titre, corps_de_texte, categorie} = req.body;
+        const {id_utilisateurs,titre, corps_de_texte, vote} = req.body;
         try {
-            const newIdee = await this.ideeRepository.createIdee({titre, corps_de_texte, categorie});
+            const newIdee = await this.ideeRepository.createIdee({id_utilisateurs,titre, corps_de_texte, vote});
             res.status(201).json(newIdee);
         } catch (error) {
             console.error(error);

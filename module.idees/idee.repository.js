@@ -4,15 +4,15 @@ class IdeeRepository{
     }
 
     async createIdee(idee) {
-        const { titre, corps_de_texte, categorie} = idee;
-        const query = 'INSERT INTO idees (titre, corps_de_texte, categorie) VALUES (?, ?, ?)';
-        const values = [titre, corps_de_texte, categorie];
+        const { id_utilisateurs,titre, corps_de_texte, vote} = idee;
+        const query = 'INSERT INTO idees (id_utilisateurs,titre, corps_de_texte, votes) VALUES (?, ?, ?, ?)';
+        const values = [id_utilisateurs,titre, corps_de_texte, vote];
         
         try {
             const result = await this.pool.query(query, values);
-            return result.rows[0];
+            return { id: result.insertId,id_utilisateurs,titre, corps_de_texte, vote};
         } catch (error) {
-            throw new Error("Erreur lors de la création de l'idée :", error.message);
+            throw new Error("Erreur lors de la création de l'idée :" + error.message);
         }
         
     }
