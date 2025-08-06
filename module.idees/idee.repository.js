@@ -5,7 +5,7 @@ class IdeeRepository{
 
     async createIdee(idee) {
         const { id_utilisateurs,titre, corps_de_texte, vote} = idee;
-        const query = 'INSERT INTO idees (id_utilisateurs,titre, corps_de_texte, votes) VALUES (?, ?, ?, ?)';
+        const query = 'INSERT INTO idees (id_utilisateurs,titre, corps_de_texte, vote) VALUES (?, ?, ?, ?)';
         const values = [id_utilisateurs,titre, corps_de_texte, vote];
         
         try {
