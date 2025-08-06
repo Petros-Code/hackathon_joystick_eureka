@@ -3,6 +3,9 @@ import morgan from "morgan";
 import express from "express";
 import pool from "./config/db.js";
 
+import userRoutes from "./routes/utilisateur.routes.js";
+import errorHandler from "./middlewares/errorHandler.js";
+
 const app = express();
 const port = 3000;
 
@@ -26,11 +29,17 @@ app.use(express.json());
 app.use(morgan("dev"));
 //#endregion
 
+app.use(express.json());
+app.use("/users", userRoutes);
 
-
-
-
+// Middleware global de gestion des erreurs
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`Server launched on http://localhost:${port}`);
 });
+
+
+
+
+
