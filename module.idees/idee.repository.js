@@ -1,0 +1,21 @@
+class IdeeRepository{
+    constructor(pool) {
+    this.pool = pool;
+    }
+
+    async createIdee(idee) {
+        const { id_utilisateurs,titre, corps_de_texte, vote} = idee;
+        const query = 'INSERT INTO idees (id_utilisateurs,titre, corps_de_texte, vote) VALUES (?, ?, ?, ?)';
+        const values = [id_utilisateurs,titre, corps_de_texte, vote];
+        
+        try {
+            const result = await this.pool.query(query, values);
+            return { id: result.insertId,id_utilisateurs,titre, corps_de_texte, vote};
+        } catch (error) {
+            throw new Error("Erreur lors de la création de l'idée :" + error.message);
+        }
+        
+    }
+}
+
+export default IdeeRepository;

@@ -9,6 +9,14 @@ import errorHandler from "./middlewares/errorHandler.js";
 const app = express();
 const port = 3000;
 
+import ideeRoutes from "./routes/idee.routes.js";
+import errorHandler from "./middlewares/errorHandler.js";
+
+app.use(express.json());
+app.use("/idees",ideeRoutes);
+
+app.use(errorHandler);
+
 //#region CHECK ETAT DU SERVEUR
 app.get("/bienvenue", (req, res) => {
     res.json({ message: "Bienvenue sur le serveur EUREKA de la ville de Pau"})
