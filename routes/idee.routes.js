@@ -1,12 +1,15 @@
 import express from "express";
 import IdeeControlleur from "../module.idees/idee.controlleur.js";
-import IdeeRepository from "..module.idees/idee.repository.js";
+import IdeeRepository from "../module.idees/idee.repository.js";
 import pool from "../config/db.js"; 
 
 const router = express.Router();
 const ideeRepository = new IdeeRepository(pool);
 const ideeControlleur = new IdeeControlleur(ideeRepository);
 
-router.post("/", ideeControlleur.createUser);
+router.post("/", ideeControlleur.createIdee);
 
 export default router;
+
+
+// test

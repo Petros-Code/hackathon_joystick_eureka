@@ -4,10 +4,14 @@ import IdeeControlleur from "./module.idees/idee.controlleur.js";
 const app = express();
 const port = 3000;
 
-// const ideeRoutes = require("./module.idees/idee.routes.js");
+import ideeRoutes from "./routes/idee.routes.js";
+import errorHandler from "./middlewares/errorHandler.js";
 
 app.use(express.json());
 app.use(IdeeControlleur);
+app.use("/idees",ideeRoutes);
+
+app.use(errorHandler);
 
 //#region CHECK ETAT DU SERVEUR
 app.get("/bienvenue", (req, res) => {
