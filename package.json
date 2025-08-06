@@ -22,5 +22,14 @@
     "mariadb": "^3.4.5",
     "morgan": "^1.10.1",
     "mysql2": "^3.14.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Petros-Code/hackathon_joystick_eureka.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Petros-Code/hackathon_joystick_eureka/issues"
+  },
+  "homepage": "https://github.com/Petros-Code/hackathon_joystick_eureka#readme"
 }
