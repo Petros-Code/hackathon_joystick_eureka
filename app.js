@@ -7,12 +7,11 @@ import pool from "./config/db.js";
 
 import categorieRoutes from "./routes/categories.routes.js";
 import commentaireRoutes from "./routes/commentaire.routes.js";
-import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/utilisateur.routes.js";
 import ideeRoutes from "./routes/idee.routes.js";
-
-import errorHandler from "./middlewares/errorHandler.js";
 import voteRoutes from "./routes/vote.routes.js";
+import authRoutes from "./routes/auth.routes.js";
+import errorHandler from "./middlewares/errorHandler.js";
 
 const app = express();
 const port = 3000;
@@ -24,12 +23,6 @@ app.use("/idees", ideeRoutes);
 app.use("/votes", voteRoutes);
 app.use("/auth", authRoutes(pool));
 app.use("/commentaires", commentaireRoutes);
-
-
-
-
-
-app.use(errorHandler);
 
 //#region CHECK ETAT DU SERVEUR
 
