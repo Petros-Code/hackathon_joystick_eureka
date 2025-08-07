@@ -16,20 +16,26 @@ const passwordMessages = {
 const inscriptionJoiSchema = Joi.object({
     email: Joi.string().email().trim().min(8).required().messages(emailMessages),
 
-    password : Joi.string().trim().min(8).required().messages(passwordMessages),
+    mot_de_passe: Joi.string().trim().min(8).required().messages(passwordMessages),
 
-    name: Joi.string().trim().min(2).required().messages({
+    nom: Joi.string().trim().min(2).required().messages({
         "string.min": "Le nom doit contenir au moins 2 caractères",
         "any.required": "Nom requis",
         "string.empty": "le nom ne peut pas être vide",
+    }),
+
+    prenom: Joi.string().trim().min(2).required().messages({
+        "string.min": "Le prénom doit contenir au moins 2 caractères",
+        "any.required": "Prénom requis",
+        "string.empty": "le prénom ne peut pas être vide",
     }),
 });
 
 const connexionJoiSchema = Joi.object({
     email: Joi.string().email().trim().min(8).required().messages(emailMessages),
 
-    password : Joi.string().trim().min(8).required().messages(passwordMessages),
+    mot_de_passe: Joi.string().trim().min(8).required().messages(passwordMessages),
 
 });
 
-export { inscriptionJoiSchema, connexionJoiSchema };
+export { inscriptionJoiSchema, connexionJoiSchema }; //route de connexion à finir

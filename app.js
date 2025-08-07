@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
@@ -16,12 +19,12 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.use(cookieParser());
 app.use("/users", userRoutes);
 app.use("/caterogies", categorieRoutes);
 app.use("/idees", ideeRoutes);
 app.use("/votes", voteRoutes);
-app.use(cookieParser());
-app.use("/idees",ideeRoutes);
+app.use("/auth", authRoutes(pool));
 
 app.use(errorHandler);
 
@@ -49,8 +52,6 @@ app.use(cors());
 app.use(morgan("dev"));
 //#endregion
 
-app.use("/users", userRoutes);
-app.use("/auth", authRoutes(pool));
 
 // Middleware global de gestion des erreurs
 app.use(errorHandler);

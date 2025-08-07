@@ -7,7 +7,7 @@ class AuthController {
 
   async login(req, res, next) {
     try {
-      const { email, password } = req.body;
+      const { email, mot_de_passe } = req.body;
 
       const user = await this.authRepository.getUserByEmail(email);
       if (!user) {
@@ -16,7 +16,7 @@ class AuthController {
         throw err;
       }
 
-      const isValid = await this.authRepository.verifyPassword(user.mot_de_passe, password);
+      const isValid = await this.authRepository.verifyPassword(user.mot_de_passe, mot_de_passe);
       if (!isValid) {
         const err = new Error("Mot de passe incorrect.");
         err.status = 401;
@@ -25,7 +25,7 @@ class AuthController {
 
       const token = jwt.sign(
         { id: user.id, email: user.email },
-        process.env.JWT_SECRET,
+        process.env.JWT_SECRET || "secret_temporaire_dev_changez_moi",
         { expiresIn: "3h" }
       );
 
