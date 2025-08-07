@@ -1,9 +1,12 @@
 import cors from "cors";
 import morgan from "morgan";
+import cookieParser from "cookie-parser";
 import express from "express";
 import pool from "./config/db.js";
 
+import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/utilisateur.routes.js";
+
 import errorHandler from "./middlewares/errorHandler.js";
 
 const app = express();
@@ -13,6 +16,7 @@ import ideeRoutes from "./routes/idee.routes.js";
 
 
 app.use(express.json());
+app.use(cookieParser());
 app.use("/idees",ideeRoutes);
 
 app.use(errorHandler);
@@ -37,8 +41,8 @@ app.use(express.json());
 app.use(morgan("dev"));
 //#endregion
 
-app.use(express.json());
 app.use("/users", userRoutes);
+app.use("/auth", authRoutes(pool));
 
 // Middleware global de gestion des erreurs
 app.use(errorHandler);
