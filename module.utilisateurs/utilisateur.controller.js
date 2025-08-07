@@ -8,8 +8,14 @@ class UserController {
 
   async createUser(req, res, next) {
     const { nom, prenom, email, mot_de_passe } = req.body;
-
+    
     try {
+      if (!nom || !prenom || !email || !mot_de_passe) {
+      const err = new Error("Champs obligatoires manquants");
+      err.status = 400;
+      throw err;
+      }
+
       const newUser = await this.userRepository.createUser({ nom, prenom, email, mot_de_passe });
       res.status(201).json(newUser);
     } catch (error) {
@@ -24,8 +30,10 @@ class UserController {
 
       const result = await this.userRepository.patchUser({ id, nom, prenom, email, mot_de_passe })
 
-      if (result.affectedRiws === 0) {
-        return res.status(404).json({ message: "Utilisateur non trouvé" });
+      if (result.affectedRows === 0) {
+        const err = new Error("Utilisateur non trouvé");
+        err.status = 404;
+        throw err;
       }
 
       res.status(200).json({ message: "Utilisateur mis à jour", id, nom, prenom, email });

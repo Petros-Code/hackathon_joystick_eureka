@@ -7,7 +7,7 @@ class UserRepository {
     try {
       const [result] = await this.pool.query(
         'INSERT INTO utilisateurs (nom, prenom, email, mot_de_passe) VALUES (?, ?, ?, ?)',
-        [nom, prenom, email, mot_de_passe, id]
+        [nom, prenom, email, mot_de_passe]
       );
       return { id: result.insertId, email, nom, prenom };
     } catch (error) {
