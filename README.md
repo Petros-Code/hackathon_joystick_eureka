@@ -16,9 +16,12 @@ Assurez-vous d’avoir **Node.js** et **MariaDB** installés sur votre machine.
 
 ##### créer un fichier .env à la racine
 
-##### Remplacer le PASSWORD par celui de votre User DB
-DB_HOST=localhost
-DB_PORT=3306
-DB_USER=root
-DB_PASSWORD= ?
-DB_NAME=EUREKA
+## Remplacer le PASSWORD par celui de votre User DB
+### DB_HOST=localhost
+### DB_PORT=3306
+### DB_USER=root
+### DB_PASSWORD= ?
+### DB_NAME=EUREKA
+
+### JWT_SECRET= définir un JWT de 64 caractères (conseillé)
+### ENV=development
