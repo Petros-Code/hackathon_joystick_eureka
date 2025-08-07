@@ -5,9 +5,11 @@ const port = 3000;
 
 import ideeRoutes from "./routes/idee.routes.js";
 import errorHandler from "./middlewares/errorHandler.js";
+import voteRoutes from "./routes/vote.routes.js";
 
 app.use(express.json());
 app.use("/idees",ideeRoutes);
+app.use("/votes",voteRoutes);
 
 app.use(errorHandler);
 
