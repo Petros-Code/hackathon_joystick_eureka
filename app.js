@@ -1,16 +1,22 @@
+import cors from "cors";
+import morgan from "morgan";
 import express from "express";
 import pool from "./config/db.js";
+
 import categorieRoutes from "./routes/categories.routes.js";
+import userRoutes from "./routes/utilisateur.routes.js";
+import ideeRoutes from "./routes/idee.routes.js";
 import errorHandler from "./middlewares/errorHandler.js";
+import voteRoutes from "./routes/vote.routes.js";
 
 const app = express();
 const port = 3000;
 
-import ideeRoutes from "./routes/idee.routes.js";
-// import errorHandler from "./middlewares/errorHandler.js";
-
 app.use(express.json());
+app.use("/users", userRoutes);
+app.use("/caterogies", categorieRoutes);
 app.use("/idees", ideeRoutes);
+app.use("/votes", voteRoutes);
 
 app.use(errorHandler);
 
@@ -33,11 +39,17 @@ app.get("/etat", async (req, res) => {
 
 //#endregion
 
-app.use(express.json());
-app.use("/categories", categorieRoutes);
+//#region MIDDLEWARES
+app.use(cors());
+app.use(morgan("dev"));
+//#endregion
 
-app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`Le serveur tourne sur : http://localhost:${port}`);
 });
+
+
+
+
+
