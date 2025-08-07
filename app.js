@@ -1,59 +1,61 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import express from "express";
 import pool from "./config/db.js";
 
-
 import categorieRoutes from "./routes/categories.routes.js";
 import commentaireRoutes from "./routes/commentaire.routes.js";
+import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/utilisateur.routes.js";
 import ideeRoutes from "./routes/idee.routes.js";
 import voteRoutes from "./routes/vote.routes.js";
-import authRoutes from "./routes/auth.routes.js";
+
 import errorHandler from "./middlewares/errorHandler.js";
 
 const app = express();
 const port = 3000;
 
+// Middlewares globaux
+app.use(cors());
+app.use(morgan("dev"));
 app.use(express.json());
+app.use(cookieParser());
+
+// Routes
 app.use("/users", userRoutes);
-app.use("/caterogies", categorieRoutes);
+app.use("/categories", categorieRoutes);
+app.use("/commentaires", commentaireRoutes);
 app.use("/idees", ideeRoutes);
 app.use("/votes", voteRoutes);
 app.use("/auth", authRoutes(pool));
-app.use("/commentaires", commentaireRoutes);
 
 //#region CHECK ETAT DU SERVEUR
 
 app.get("/bienvenue", (req, res) => {
   res.json({ message: "Bienvenue sur le serveur EUREKA de la ville de Pau" });
 });
+
 app.get("/etat", async (req, res) => {
   try {
     await pool.query("SELECT 1");
     res.status(200).json({ status: "OK", message: "Connecté à la DB" });
   } catch (error) {
-    console.error("Erreur de connexion avc la DB :", error.message);
+    console.error("Erreur de connexion avec la DB :", error.message);
     res
       .status(500)
-      .json({ status: "ERREUR", message: "Erreur de connexio navec la DB" });
+      .json({ status: "ERREUR", message: "Erreur de connexion avec la DB" });
   }
 });
 
 //#endregion
 
-// Middleware global de gestion des erreurs
+// Middleware global de gestion des erreurs (toujours en dernier)
 app.use(errorHandler);
-app.use(cors());
-app.use(morgan("dev"));
-app.use(cookieParser());
 
 app.listen(port, () => {
   console.log(`Le serveur tourne sur : http://localhost:${port}`);
 });
-
-
-
-
-
