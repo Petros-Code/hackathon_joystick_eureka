@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import cors from "cors";
+import cors from "cors"; //Pas encore utilse tant que pas de front / API Pure
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import express from "express";

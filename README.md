@@ -12,12 +12,12 @@ Assurez-vous d’avoir **Node.js** et **MariaDB** installés sur votre machine.
 
 #### npm init -y
 
-##### npm i cors dotenv express joi mariadb morgan mysql2 argon2 cookie-parser jsonwebtoken
+##### npm i cors dotenv express joi mariadb mysql2 argon2 cookie-parser jsonwebtoken
 
 ##### créer un fichier .env à la racine
 
-##### DB_HOST=localhost
-
+##### Remplacer le PASSWORD par celui de votre User DB
+DB_HOST=localhost
 DB_PORT=3306
 DB_USER=root
 DB_PASSWORD= ?
