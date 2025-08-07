@@ -8,11 +8,9 @@ const categorieRepository = new CategorieRepository(pool);
 const categorieController = new CategorieController(categorieRepository);
 
 router.post("/", categorieController.createCategorie);
-router.get("/categories", categorieController.getAllCategories);
+router.get("/", categorieController.getAllCategories);
 router.get("/:id", categorieController.getCategorieById);
-
-router.delete("/:id", (req, res, next) =>
-  categorieController.deleteCategorie(req, res, next)
-);
+router.put("/:id", categorieController.updateCategorie);
+router.delete("/:id", categorieController.deleteCategorie);
 
 export default router;

@@ -11,6 +11,13 @@ class CommentaireController {
     const { id_utilisateurs, id_idee, titre, corps_de_texte } = req.body;
 
     try {
+      // Validation des champs requis
+      if (!id_utilisateurs || !id_idee || !titre || !corps_de_texte) {
+        const err = new Error("Tous les champs sont requis (id_utilisateurs, id_idee, titre, corps_de_texte)");
+        err.status = 400;
+        throw err;
+      }
+
       const newCommentaire = await this.commentaireRepository.createCommentaire(
         {
           id_utilisateurs,
@@ -55,11 +62,19 @@ class CommentaireController {
     const { id } = req.params;
 
     try {
+      if (!id) {
+        const err = new Error("ID du commentaire requis");
+        err.status = 400;
+        throw err;
+      }
+
       const deleted = await this.commentaireRepository.deleteCommentaire(id);
       if (!deleted) {
-        return res.status(404).json({ message: "Commentaire non trouvé" });
+        const err = new Error("Commentaire non trouvé");
+        err.status = 404;
+        throw err;
       }
-      res.status(200).json({ message: "Commentaire supprimé avec succès" });
+      res.status(200).json({ message: "Commentaire supprimé avec succès", id });
     } catch (error) {
       next(error);
     }

@@ -9,9 +9,8 @@ const ideeControlleur = new IdeeControlleur(ideeRepository);
 
 router.post("/", ideeControlleur.createIdee);
 router.get("/", ideeControlleur.getIdees);
+router.get("/:id", ideeControlleur.getIdeeById);
+router.put("/:id", ideeControlleur.updateIdee);
 router.delete("/:id", ideeControlleur.deleteIdee);
 
 export default router;
-
-
-// test smart commit

@@ -3,16 +3,16 @@ class CategorieRepository {
     this.pool = pool;
   }
 
-  async createCategorie({ id, nom }) {
+  async createCategorie({ nom }) {
     try {
       const [result] = await this.pool.query(
-        "INSERT INTO categories (id, nom) VALUES (?, ?)",
-        [id, nom]
+        "INSERT INTO categories (nom) VALUES (?)",
+        [nom]
       );
-      return { id: result.insertId, id, nom };
+      return { id: result.insertId, nom };
     } catch (error) {
       throw new Error(
-        "Erreur lors de la création de la catégories : " + error.message
+        "Erreur lors de la création de la catégorie : " + error.message
       );
     }
   }
@@ -30,11 +30,32 @@ class CategorieRepository {
 
   //getById
   async getCategorieById(id) {
-    const [rows] = await this.pool.query(
-      "SELECT id, nom FROM categories WHERE id = ?",
-      [id]
-    );
-    return rows[0];
+    try {
+      const [rows] = await this.pool.query(
+        "SELECT id, nom FROM categories WHERE id = ?",
+        [id]
+      );
+      return rows[0];
+    } catch (error) {
+      throw new Error(
+        "Erreur lors de la récupération de la catégorie : " + error.message
+      );
+    }
+  }
+
+  // updateCategorie
+  async updateCategorie(id, { nom }) {
+    try {
+      const [result] = await this.pool.query(
+        "UPDATE categories SET nom = ? WHERE id = ?",
+        [nom, id]
+      );
+      return result.affectedRows > 0;
+    } catch (error) {
+      throw new Error(
+        "Erreur lors de la mise à jour de la catégorie : " + error.message
+      );
+    }
   }
   // Supprimer ById
   async deleteCategorie(id) {

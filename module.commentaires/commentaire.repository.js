@@ -24,16 +24,29 @@ class CommentaireRepository {
   }
   // get all commentaires
   async getAllCommentaires() {
-    const [rows] = await this.pool.query("SELECT * FROM commentaires");
-    return rows;
+    try {
+      const [rows] = await this.pool.query("SELECT * FROM commentaires");
+      return rows;
+    } catch (error) {
+      throw new Error(
+        "Erreur lors de la récupération des commentaires : " + error.message
+      );
+    }
   }
+  
   // get commentaire ById
   async getCommentaireById(id) {
-    const [rows] = await this.pool.query(
-      "SELECT * FROM commentaires WHERE id = ?",
-      [id]
-    );
-    return rows[0];
+    try {
+      const [rows] = await this.pool.query(
+        "SELECT * FROM commentaires WHERE id = ?",
+        [id]
+      );
+      return rows[0];
+    } catch (error) {
+      throw new Error(
+        "Erreur lors de la récupération du commentaire : " + error.message
+      );
+    }
   }
   // supprimer un commentaire
   async deleteCommentaire(id) {
@@ -42,7 +55,7 @@ class CommentaireRepository {
         "DELETE FROM commentaires WHERE id = ?",
         [id]
       );
-      //return result.affectedRows > 0; // ?
+      return result.affectedRows > 0;
     } catch (error) {
       throw new Error(
         "Erreur lors de la suppression du commentaire : " + error.message
