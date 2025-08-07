@@ -36,5 +36,17 @@ class CategorieRepository {
     );
     return rows[0];
   }
+  // Supprimer ById
+  async deleteCategorie(id) {
+    try {
+      const [result] = await this.pool.query(
+        "DELETE FROM categories WHERE id = ?",
+        [id]
+      );
+      return result.affectedRows > 0;
+    } catch (error) {
+      throw new Error("Erreur lors de la suppression : " + error.message);
+    }
+  }
 }
 export default CategorieRepository;

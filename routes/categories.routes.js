@@ -10,5 +10,9 @@ const categorieController = new CategorieController(categorieRepository);
 router.post("/", categorieController.createCategorie);
 router.get("/categories", categorieController.getAllCategories); // get all categories
 router.get("/:id", categorieController.getCategorieById);
+// router.delete("/:id", categorieController.getCategorieById);
+router.delete("/:id", (req, res, next) =>
+  categorieController.deleteCategorie(req, res, next)
+);
 
 export default router;

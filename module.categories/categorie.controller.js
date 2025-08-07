@@ -42,6 +42,21 @@ class CategorieController {
       next(error);
     }
   }
+  // supprimer ById
+  async deleteCategorie(req, res, next) {
+    const { id } = req.params;
+
+    try {
+      const deleted = await this.categorieRepository.deleteCategorie(id);
+      if (deleted) {
+        res.status(200).json({ message: "Catégorie supprimée avec succès." });
+      } else {
+        res.status(404).json({ message: "Catégorie non trouvée." });
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default CategorieController;
