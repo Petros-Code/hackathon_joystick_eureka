@@ -25,6 +25,16 @@ class IdeeRepository{
             throw new Error("Erreur lors de la récupération des idées :" + error.message);
         }
     }
+
+    async deleteIdee(id) {
+        const query = 'DELETE FROM idees WHERE id = ?';
+        try {
+            const result = await this.pool.query(query, [id]);
+            return result.affectedRows > 0;
+        } catch (error) {
+            throw new Error("Erreur lors de la suppression de l'idée :" + error.message);
+        }
+    }
 }
 
 export default IdeeRepository;

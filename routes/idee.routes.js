@@ -9,6 +9,7 @@ const ideeControlleur = new IdeeControlleur(ideeRepository);
 
 router.post("/", ideeControlleur.createIdee);
 router.get("/", ideeControlleur.getIdees);
+router.delete("/:id", ideeControlleur.deleteIdee);
 
 export default router;
 
