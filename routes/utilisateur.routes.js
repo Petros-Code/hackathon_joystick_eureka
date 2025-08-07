@@ -8,5 +8,7 @@ const userRepository = new UserRepository(pool);
 const userController = new UserController(userRepository);
 
 router.post("/", userController.createUser);
+router.patch("/:id", userController.patchUser);
+router.delete("/:id", userController.deleteUser);
 
 export default router;
