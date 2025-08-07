@@ -7,10 +7,10 @@ const app = express();
 const port = 3000;
 
 import ideeRoutes from "./routes/idee.routes.js";
-import errorHandler from "./middlewares/errorHandler.js";
+// import errorHandler from "./middlewares/errorHandler.js";
 
 app.use(express.json());
-app.use("/idees",ideeRoutes);
+app.use("/idees", ideeRoutes);
 
 app.use(errorHandler);
 

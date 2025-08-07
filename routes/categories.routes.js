@@ -8,6 +8,6 @@ const categorieRepository = new CategorieRepository(pool);
 const categorieController = new CategorieController(categorieRepository);
 
 router.post("/", categorieController.createCategorie);
-//router.get("/categories", categorieController.getAllCategorie);
+router.get("/categories", categorieController.getAllCategories); // get all categories
 
 export default router;

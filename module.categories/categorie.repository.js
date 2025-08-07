@@ -16,6 +16,16 @@ class CategorieRepository {
       );
     }
   }
+  // get
+  async getAllCategories() {
+    try {
+      const [rows] = await this.pool.query("SELECT id, nom FROM categories");
+      return rows;
+    } catch (error) {
+      throw new Error(
+        "Erreur lors de la récupération des catégories : " + error.message
+      );
+    }
+  }
 }
-
 export default CategorieRepository;
