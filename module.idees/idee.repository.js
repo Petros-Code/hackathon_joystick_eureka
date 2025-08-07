@@ -16,6 +16,25 @@ class IdeeRepository{
         }
         
     }
+    async getIdees() {
+        const query = 'SELECT * FROM idees';
+        try {
+            const rows = await this.pool.query(query);
+            return rows;
+        } catch (error) {
+            throw new Error("Erreur lors de la récupération des idées :" + error.message);
+        }
+    }
+
+    async deleteIdee(id) {
+        const query = 'DELETE FROM idees WHERE id = ?';
+        try {
+            const result = await this.pool.query(query, [id]);
+            return result.affectedRows > 0;
+        } catch (error) {
+            throw new Error("Erreur lors de la suppression de l'idée :" + error.message);
+        }
+    }
 }
 
 export default IdeeRepository;
