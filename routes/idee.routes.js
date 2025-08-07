@@ -8,6 +8,7 @@ const ideeRepository = new IdeeRepository(pool);
 const ideeControlleur = new IdeeControlleur(ideeRepository);
 
 router.post("/", ideeControlleur.createIdee);
+router.get("/", ideeControlleur.getIdees);
 
 export default router;
 

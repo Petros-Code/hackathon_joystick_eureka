@@ -9,6 +9,7 @@ import errorHandler from "./middlewares/errorHandler.js";
 app.use(express.json());
 app.use("/idees",ideeRoutes);
 
+
 app.use(errorHandler);
 
 //#region CHECK ETAT DU SERVEUR

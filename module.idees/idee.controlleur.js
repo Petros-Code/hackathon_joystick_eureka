@@ -14,6 +14,15 @@ class IdeeControlleur {
             next(error);
         }
     }
+    async getIdees(res, next) {
+        try {
+            const idees = await this.ideeRepository.getIdees();
+            res.status(200).json(idees);
+        } catch (error) {
+            console.error(error);
+            next(error);
+        }
+    }
 
 
 }

@@ -16,6 +16,15 @@ class IdeeRepository{
         }
         
     }
+    async getIdees() {
+        const query = 'SELECT * FROM idees';
+        try {
+            const rows = await this.pool.query(query);
+            return rows;
+        } catch (error) {
+            throw new Error("Erreur lors de la récupération des idées :" + error.message);
+        }
+    }
 }
 
 export default IdeeRepository;
