@@ -1,11 +1,14 @@
 import cors from "cors";
 import morgan from "morgan";
+import cookieParser from "cookie-parser";
 import express from "express";
 import pool from "./config/db.js";
 
 import categorieRoutes from "./routes/categories.routes.js";
+import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/utilisateur.routes.js";
 import ideeRoutes from "./routes/idee.routes.js";
+
 import errorHandler from "./middlewares/errorHandler.js";
 import voteRoutes from "./routes/vote.routes.js";
 
@@ -17,6 +20,8 @@ app.use("/users", userRoutes);
 app.use("/caterogies", categorieRoutes);
 app.use("/idees", ideeRoutes);
 app.use("/votes", voteRoutes);
+app.use(cookieParser());
+app.use("/idees",ideeRoutes);
 
 app.use(errorHandler);
 
@@ -44,6 +49,11 @@ app.use(cors());
 app.use(morgan("dev"));
 //#endregion
 
+app.use("/users", userRoutes);
+app.use("/auth", authRoutes(pool));
+
+// Middleware global de gestion des erreurs
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`Le serveur tourne sur : http://localhost:${port}`);
