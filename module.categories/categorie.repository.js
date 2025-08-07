@@ -27,5 +27,14 @@ class CategorieRepository {
       );
     }
   }
+
+  //getById
+  async getCategorieById(id) {
+    const [rows] = await this.pool.query(
+      "SELECT id, nom FROM categories WHERE id = ?",
+      [id]
+    );
+    return rows[0];
+  }
 }
 export default CategorieRepository;

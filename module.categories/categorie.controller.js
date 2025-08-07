@@ -3,6 +3,7 @@ class CategorieController {
     this.categorieRepository = categorieRepository;
     this.createCategorie = this.createCategorie.bind(this);
     this.getAllCategories = this.getAllCategories.bind(this); // pour get
+    this.getCategorieById = this.getCategorieById.bind(this); // getById
   }
 
   async createCategorie(req, res, next) {
@@ -24,6 +25,19 @@ class CategorieController {
     try {
       const rows = await this.categorieRepository.getAllCategories();
       res.status(200).json(rows);
+    } catch (error) {
+      next(error);
+    }
+  }
+  // getById
+  async getCategorieById(req, res, next) {
+    const { id } = req.params;
+    try {
+      const categorie = await this.categorieRepository.getCategorieById(id);
+      if (!categorie) {
+        return res.status(404).json({ message: "Catégorie non trouvée" });
+      }
+      res.status(200).json(categorie);
     } catch (error) {
       next(error);
     }
