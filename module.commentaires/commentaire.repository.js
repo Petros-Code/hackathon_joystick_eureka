@@ -22,6 +22,19 @@ class CommentaireRepository {
       );
     }
   }
+  // get all commentaires
+  async getAllCommentaires() {
+    const [rows] = await this.pool.query("SELECT * FROM commentaires");
+    return rows;
+  }
+  // get all commentaires ById
+  async getCommentaireById(id) {
+    const [rows] = await this.pool.query(
+      "SELECT * FROM commentaires WHERE id = ?",
+      [id]
+    );
+    return rows[0]; // un seul commentaire
+  }
 }
 
 export default CommentaireRepository;

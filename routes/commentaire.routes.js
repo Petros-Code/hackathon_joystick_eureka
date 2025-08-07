@@ -8,7 +8,12 @@ const router = express.Router();
 const commentaireRepository = new CommentaireRepository(pool);
 const commentaireController = new CommentaireController(commentaireRepository);
 
-// POST : créer un commentaire
+// post commentaire
 router.post("/", commentaireController.createCommentaire);
+// get All commentaires
+router.get("/", commentaireController.getAllCommentaires);
+
+// post commentaire ById
+router.get("/:id", commentaireController.getCommentaireById);
 
 export default router;
