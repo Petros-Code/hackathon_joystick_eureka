@@ -1,6 +1,7 @@
 import express from "express";
 import pool from "./config/db.js";
 import categorieRoutes from "./routes/categories.routes.js";
+import commentaireRoutes from "./routes/commentaire.routes.js";
 import errorHandler from "./middlewares/errorHandler.js";
 
 const app = express();
@@ -35,6 +36,7 @@ app.get("/etat", async (req, res) => {
 
 app.use(express.json());
 app.use("/categories", categorieRoutes);
+app.use("/commentaires", commentaireRoutes);
 
 app.use(errorHandler);
 
