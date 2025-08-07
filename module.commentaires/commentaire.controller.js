@@ -4,6 +4,7 @@ class CommentaireController {
     this.createCommentaire = this.createCommentaire.bind(this);
     this.getAllCommentaires = this.getAllCommentaires.bind(this);
     this.getCommentaireById = this.getCommentaireById.bind(this);
+    this.deleteCommentaire = this.deleteCommentaire.bind(this);
   }
 
   async createCommentaire(req, res, next) {
@@ -48,6 +49,20 @@ class CommentaireController {
       next(error);
     }
   }
-}
 
+  // supprimer un commentaire
+  async deleteCommentaire(req, res, next) {
+    const { id } = req.params;
+
+    try {
+      const deleted = await this.commentaireRepository.deleteCommentaire(id);
+      if (!deleted) {
+        return res.status(404).json({ message: "Commentaire non trouvé" });
+      }
+      res.status(200).json({ message: "Commentaire supprimé avec succès" });
+    } catch (error) {
+      next(error);
+    }
+  }
+}
 export default CommentaireController;

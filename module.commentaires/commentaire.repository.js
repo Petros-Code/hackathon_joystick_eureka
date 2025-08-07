@@ -27,14 +27,27 @@ class CommentaireRepository {
     const [rows] = await this.pool.query("SELECT * FROM commentaires");
     return rows;
   }
-  // get all commentaires ById
+  // get commentaire ById
   async getCommentaireById(id) {
     const [rows] = await this.pool.query(
       "SELECT * FROM commentaires WHERE id = ?",
       [id]
     );
-    return rows[0]; // un seul commentaire
+    return rows[0];
+  }
+  // supprimer un commentaire
+  async deleteCommentaire(id) {
+    try {
+      const [result] = await this.pool.query(
+        "DELETE FROM commentaires WHERE id = ?",
+        [id]
+      );
+      //return result.affectedRows > 0; // ?
+    } catch (error) {
+      throw new Error(
+        "Erreur lors de la suppression du commentaire : " + error.message
+      );
+    }
   }
 }
-
 export default CommentaireRepository;
