@@ -4,7 +4,9 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import pool from "./config/db.js";
 
+
 import categorieRoutes from "./routes/categories.routes.js";
+import commentaireRoutes from "./routes/commentaire.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/utilisateur.routes.js";
 import ideeRoutes from "./routes/idee.routes.js";
@@ -20,8 +22,10 @@ app.use("/users", userRoutes);
 app.use("/caterogies", categorieRoutes);
 app.use("/idees", ideeRoutes);
 app.use("/votes", voteRoutes);
-app.use(cookieParser());
-app.use("/idees",ideeRoutes);
+app.use("/auth", authRoutes(pool));
+app.use("/commentaires", commentaireRoutes);
+
+
 
 app.use(errorHandler);
 
@@ -44,16 +48,11 @@ app.get("/etat", async (req, res) => {
 
 //#endregion
 
-//#region MIDDLEWARES
-app.use(cors());
-app.use(morgan("dev"));
-//#endregion
-
-app.use("/users", userRoutes);
-app.use("/auth", authRoutes(pool));
-
 // Middleware global de gestion des erreurs
 app.use(errorHandler);
+app.use(cors());
+app.use(morgan("dev"));
+app.use(cookieParser());
 
 app.listen(port, () => {
   console.log(`Le serveur tourne sur : http://localhost:${port}`);
